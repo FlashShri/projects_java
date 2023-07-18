@@ -31,7 +31,7 @@ public class Email {
 
         //generate email
         this.email = getEmail();
-        System.out.println(email);
+        System.out.println("your email: "+email);
 
     }
 
@@ -105,5 +105,12 @@ public class Email {
     //get password
     public String getPassword(){
         return password;
+    }
+
+    //Show info to console
+    public void displayInfo(){
+        System.out.println("User Name: "+firstName+" "+lastName+".\n"+
+                           "User Email: "+email+"\n"+
+                           "Mailbox Capacity: "+ mailboxCapacity);
     }
 }
