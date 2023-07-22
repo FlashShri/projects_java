@@ -1,9 +1,13 @@
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.KeyStroke;
 import javax.swing.WindowConstants;
-
+import java.awt.event.*;
 public class TextLime  extends JFrame{
     
     public TextLime(){
@@ -60,7 +64,28 @@ public class TextLime  extends JFrame{
 
         help.add(aboutButton);
 
-        //
+        //adding KeyBoard short cuts
+
+        newButton.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,ActionEvent.CTRL_MASK));
+        openButton.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,ActionEvent.CTRL_MASK));
+        saveButtton.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,ActionEvent.CTRL_MASK));
+        printButton.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P,ActionEvent.CTRL_MASK));
+        exitButton.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE,ActionEvent.CTRL_MASK));
+        copyButton.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C,ActionEvent.CTRL_MASK));
+        pasteButton.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V,ActionEvent.CTRL_MASK));
+        cutButton.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X,ActionEvent.CTRL_MASK));
+        selectAllButton.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A,ActionEvent.CTRL_MASK));
+        aboutButton.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H,ActionEvent.CTRL_MASK));
+        
+        //adding text area 
+        JTextArea area = new JTextArea();
+        area.setLineWrap(true);
+        area.setWrapStyleWord(true);
+
+        JScrollPane pane = new JScrollPane(area);
+        pane.setBorder(BorderFactory.createEmptyBorder());
+        add(pane);
+
 
         setVisible(true);
 
