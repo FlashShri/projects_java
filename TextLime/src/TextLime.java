@@ -29,7 +29,38 @@ public class TextLime  extends JFrame{
         menu_bar.add(edit);
         menu_bar.add(help);
 
-       
+        //now creating menu items in File menu
+        JMenuItem newButton = new JMenuItem("New");
+        JMenuItem openButton = new JMenuItem("Open");
+        JMenuItem saveButtton = new JMenuItem("Save");
+        JMenuItem printButton = new JMenuItem("Print");
+        JMenuItem exitButton = new JMenuItem("Exit"); 
+
+        // creating menu items in Edit menu
+        JMenuItem copyButton = new JMenuItem("Copy");
+        JMenuItem pasteButton = new JMenuItem("Paste");
+        JMenuItem cutButton = new JMenuItem("Cut");
+        JMenuItem selectAllButton = new JMenuItem("Select All");
+
+        //creating menu items in Help menu
+        JMenuItem aboutButton = new JMenuItem("About");
+
+        //Adding menu items to Menu
+
+        file.add(newButton);
+        file.add(openButton);
+        file.add(saveButtton);
+        file.add(printButton);
+        file.add(exitButton);
+
+        edit.add(copyButton);
+        edit.add(pasteButton);
+        edit.add(cutButton);
+        edit.add(selectAllButton);
+
+        help.add(aboutButton);
+
+        //
 
         setVisible(true);
 
