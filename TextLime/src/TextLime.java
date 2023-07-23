@@ -20,6 +20,7 @@ import java.io.FileWriter;
 public class TextLime  extends JFrame implements ActionListener{
     
     JTextArea area;
+    String  text ="";
     public TextLime(){
         setSize(750, 850);
         setTitle("TextLime Editor");
@@ -105,6 +106,11 @@ public class TextLime  extends JFrame implements ActionListener{
         printButton.addActionListener(this);
         exitButton.addActionListener(this);
 
+        copyButton.addActionListener(this);
+        pasteButton.addActionListener(this);
+        cutButton.addActionListener(this);
+        selectAllButton.addActionListener(this);
+        aboutButton.addActionListener(this);
 
         setVisible(true);
 
@@ -171,6 +177,17 @@ public class TextLime  extends JFrame implements ActionListener{
             }
         }else if(e.getActionCommand().equals("Exit")){
             System.exit(0);
+        }else if(e.getActionCommand().equals("Copy")){
+            text = area.getSelectedText();
+        }else if(e.getActionCommand().equals("Paste")){
+            area.insert(text, area.getCaretPosition());
+        }else if(e.getActionCommand().equals("Cut")){
+            text = area.getSelectedText();
+            area.replaceRange("", area.getSelectionStart(), area.getSelectionEnd());
+        }else if (e.getActionCommand().equals("Select All")) {
+        area.selectAll();
+        }else if (e.getActionCommand().equals("About")) {
+        new About().setVisible(true);
         }
 
 
