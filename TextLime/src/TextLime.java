@@ -1,4 +1,5 @@
 import javax.swing.BorderFactory;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -7,9 +8,18 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 import javax.swing.WindowConstants;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+import java.awt.*;
 import java.awt.event.*;
-public class TextLime  extends JFrame{
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+public class TextLime  extends JFrame implements ActionListener{
     
+    JTextArea area;
     public TextLime(){
         setSize(750, 850);
         setTitle("TextLime Editor");
@@ -70,7 +80,7 @@ public class TextLime  extends JFrame{
         openButton.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,ActionEvent.CTRL_MASK));
         saveButtton.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,ActionEvent.CTRL_MASK));
         printButton.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P,ActionEvent.CTRL_MASK));
-        exitButton.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE,ActionEvent.CTRL_MASK));
+        exitButton.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0));
         copyButton.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C,ActionEvent.CTRL_MASK));
         pasteButton.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V,ActionEvent.CTRL_MASK));
         cutButton.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X,ActionEvent.CTRL_MASK));
@@ -78,13 +88,22 @@ public class TextLime  extends JFrame{
         aboutButton.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H,ActionEvent.CTRL_MASK));
         
         //adding text area 
-        JTextArea area = new JTextArea();
+        area = new JTextArea();
         area.setLineWrap(true);
         area.setWrapStyleWord(true);
+        area.setFont(new Font("SAN_SERIF",Font.PLAIN,20));
 
         JScrollPane pane = new JScrollPane(area);
         pane.setBorder(BorderFactory.createEmptyBorder());
         add(pane);
+
+        //adding acction listners
+
+        newButton.addActionListener(this);
+        openButton.addActionListener(this);
+        saveButtton.addActionListener(this);
+        printButton.addActionListener(this);
+        exitButton.addActionListener(this);
 
 
         setVisible(true);
@@ -93,7 +112,72 @@ public class TextLime  extends JFrame{
 
     }
 
-    public static void main(String[] args) {
+   
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getActionCommand().equals("New")){
+            area.setText("");
+        }else if(e.getActionCommand().equals("Open")){
+            JFileChooser chooser = new JFileChooser();
+            chooser.setAcceptAllFileFilterUsed(false);
+            FileNameExtensionFilter restrict = new FileNameExtensionFilter("Only .txt files", "txt");
+            chooser.addChoosableFileFilter(restrict);
+
+            int action = chooser.showOpenDialog(this);
+
+            if(action == JFileChooser.APPROVE_OPTION){
+                File file = chooser.getSelectedFile() ;
+
+                try {
+                    
+                    BufferedReader br = new BufferedReader(new FileReader(file));
+
+                    area.read(br,null);
+                    br.close();
+                    area.requestFocus();
+
+                } catch (Exception e1) {
+                    // TODO: handle exception
+                    e1.printStackTrace();
+                }
+                
+            }
+
+        }else if(e.getActionCommand().equals("Save")){
+
+            JFileChooser saveAs = new JFileChooser();
+            saveAs.setApproveButtonText("Save");
+
+            int action = saveAs.showOpenDialog(this);
+
+            if(action != JFileChooser.APPROVE_OPTION){return;}
+
+            File filename = new File(saveAs.getSelectedFile()+".txt");
+            BufferedWriter outFile = null ;
+            try {
+                outFile = new BufferedWriter(new FileWriter(filename ));
+                area.write(outFile);
+            } catch (Exception e2) {
+                // TODO: handle exception
+                e2.printStackTrace();
+            }
+
+        }else if(e.getActionCommand().equals("Print")){
+            try {
+                area.print();
+            } catch (Exception e3) {
+                // TODO: handle exception
+            }
+        }else if(e.getActionCommand().equals("Exit")){
+            System.exit(0);
+        }
+
+
+        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+    }
+
+     public static void main(String[] args) {
         TextLime txtl = new TextLime();
     }
 
