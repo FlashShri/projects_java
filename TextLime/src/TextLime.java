@@ -1,22 +1,26 @@
-import javax.swing.BorderFactory;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.KeyStroke;
-import javax.swing.WindowConstants;
+// import javax.swing.BorderFactory;
+// import javax.swing.JFileChooser;
+// import javax.swing.JFrame;
+// import javax.swing.JMenu;
+// import javax.swing.JMenuBar;
+// import javax.swing.JMenuItem;
+// import javax.swing.JScrollPane;
+// import javax.swing.JTextArea;
+// import javax.swing.KeyStroke;
+// import javax.swing.WindowConstants;
+// import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.*;
+
+// import java.io.BufferedReader;
+// import java.io.BufferedWriter;
+// import java.io.File;
+// import java.io.FileReader;
+// import java.io.FileWriter;
 public class TextLime  extends JFrame implements ActionListener{
     
     JTextArea area;

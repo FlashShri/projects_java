@@ -1,7 +1,7 @@
-import javax.swing.JDialog;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.text.JTextComponent;
+
 
 public class About extends JFrame{
 
