@@ -5,21 +5,21 @@ import javax.swing.JTextPane;
 import javax.swing.WindowConstants;
 
 import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class AppLayout extends JFrame implements ActionListener {
-    //       JLabel passField;
-
-        
-
        public JTextPane f;
+       public JLabel messageLabel ;
 
     public AppLayout(){
 
-        setSize(750, 850);
+        setBounds(200,0,1000,1080);
         setTitle("Unbreakable Password");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
         JLabel label = new JLabel("Password Generator");
         label.setBounds(60, 50, 150, 20);
 
@@ -28,13 +28,6 @@ public class AppLayout extends JFrame implements ActionListener {
 
         JButton b = new JButton("New");
         b.setBounds(60, 100, 85, 30);
-
-
-        
-        
-        // passField = new JLabel("**********");
-        // passField.setBounds(60, 130, 300, 30);
-        // add(passField);
 
         f = new JTextPane();
         f.setBounds(100,200,300,100);
@@ -49,20 +42,21 @@ public class AppLayout extends JFrame implements ActionListener {
         add(label2);
         add(b);
         add(f);
+
+        JButton copy = new JButton("copy");
+            copy.setBounds(60, 310, 85, 30);
+            add(copy);
+
+         messageLabel = new JLabel();
+                messageLabel.setBounds(60, 380, 150, 20);
+                add(messageLabel);
        
 
         b.addActionListener(this);
+        copy.addActionListener(this);
 
-
-
-
-
-        setSize(450, 650);
         setLayout(null);
         setVisible(true);
-
-
-
 
     }
 
@@ -70,6 +64,9 @@ public class AppLayout extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent a) {
         // TODO Auto-generated method stub
         try {
+
+            messageLabel.setText("");
+            if(a.getActionCommand().equals("New")){
 
             int passlength = 10;
             String set = "ABCDEEFGHIJKLNMOPQRSTUVWXYZ1233456789!@#$";
@@ -80,11 +77,20 @@ public class AppLayout extends JFrame implements ActionListener {
             }
 
             f.setText(new String(passaword));
+            }
+            else if(a.getActionCommand().equals("copy")){
+                System.out.println("copy perforrmed");
 
-            JButton copy = new JButton("copy");
-            copy.setBounds(60, 310, 85, 30);
+                // copy to clipboard
+                StringSelection ss = new StringSelection(f.getText());
+                Clipboard cpb = Toolkit.getDefaultToolkit().getSystemClipboard();
+                cpb.setContents(ss, null);
 
-            add(copy);
+                messageLabel.setText("password copied");
+            
+            }
+
+            
 
             
         } catch (Exception e) {
